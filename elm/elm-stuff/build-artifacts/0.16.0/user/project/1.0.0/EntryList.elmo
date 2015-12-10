@@ -1,0 +1,99 @@
+Elm.EntryList = Elm.EntryList || {};
+Elm.EntryList.make = function (_elm) {
+   "use strict";
+   _elm.EntryList = _elm.EntryList || {};
+   if (_elm.EntryList.values) return _elm.EntryList.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $Html$Events = Elm.Html.Events.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $StartApp$Simple = Elm.StartApp.Simple.make(_elm),
+   $String = Elm.String.make(_elm);
+   var _op = {};
+   var debug = function (model) {
+      return A2($Html.div,_U.list([]),_U.list([A2($Html.h3,_U.list([]),_U.list([$Html.text(A2($Basics._op["++"],"New Entry: ",model.newEntry))]))]));
+   };
+   var updateList = function (model) {
+      var doSearch = $Basics.not($String.isEmpty(model.searchFor));
+      var filteredList = doSearch ? A2($List.filter,function (e) {    return A2($String.contains,model.searchFor,e);},model.entries) : model.entries;
+      return _U.update(model,{filteredEntries: filteredList});
+   };
+   var update = F2(function (action,model) {
+      var _p0 = action;
+      switch (_p0.ctor)
+      {case "NoOp": return model;
+         case "Add": return updateList(_U.update(model,{entries: A2($Basics._op["++"],model.entries,_U.list([_p0._0])),newEntry: ""}));
+         case "Update": return _U.update(model,{newEntry: _p0._0});
+         case "Remove": var filteredList = A2($List.filter,function (e) {    return !_U.eq(e,_p0._0);},model.entries);
+           return updateList(_U.update(model,{entries: filteredList}));
+         default: return updateList(_U.update(model,{searchFor: _p0._0}));}
+   });
+   var Search = function (a) {    return {ctor: "Search",_0: a};};
+   var searchForm = F2(function (address,model) {
+      return A2($Html.div,
+      _U.list([]),
+      _U.list([A2($Html.input,
+      _U.list([$Html$Attributes.type$("text")
+              ,$Html$Attributes.placeholder("Search")
+              ,$Html$Attributes.value(model.searchFor)
+              ,A3($Html$Events.on,"input",$Html$Events.targetValue,function (_p1) {    return A2($Signal.message,address,Search(_p1));})]),
+      _U.list([]))]));
+   });
+   var Remove = function (a) {    return {ctor: "Remove",_0: a};};
+   var entryItem = F2(function (address,entry) {
+      return A2($Html.li,
+      _U.list([]),
+      _U.list([A2($Html.span,_U.list([]),_U.list([$Html.text(entry)]))
+              ,A2($Html.button,_U.list([A2($Html$Events.onClick,address,Remove(entry))]),_U.list([$Html.text("Remove")]))]));
+   });
+   var entryList = F2(function (address,model) {    return A2($Html.ul,_U.list([]),A2($List.map,entryItem(address),model.filteredEntries));});
+   var Update = function (a) {    return {ctor: "Update",_0: a};};
+   var Add = function (a) {    return {ctor: "Add",_0: a};};
+   var entryForm = F2(function (address,model) {
+      return A2($Html.div,
+      _U.list([]),
+      _U.list([A2($Html.input,
+              _U.list([$Html$Attributes.type$("text")
+                      ,$Html$Attributes.placeholder("Entry Name")
+                      ,$Html$Attributes.value(model.newEntry)
+                      ,A3($Html$Events.on,"input",$Html$Events.targetValue,function (_p2) {    return A2($Signal.message,address,Update(_p2));})]),
+              _U.list([]))
+              ,A2($Html.button,_U.list([A2($Html$Events.onClick,address,Add(model.newEntry))]),_U.list([$Html.text("Add")]))]));
+   });
+   var view = F2(function (address,model) {
+      return A2($Html.div,
+      _U.list([]),
+      _U.list([A2($Html.h2,_U.list([]),_U.list([$Html.text("Entries")]))
+              ,A2(searchForm,address,model)
+              ,A2(entryForm,address,model)
+              ,A2(entryList,address,model)
+              ,debug(model)]));
+   });
+   var NoOp = {ctor: "NoOp"};
+   var initialModel = {newEntry: "",searchFor: "",entries: _U.list(["a","b","c"]),filteredEntries: _U.list(["a","b","c"])};
+   var main = $StartApp$Simple.start({model: initialModel,view: view,update: update});
+   var Model = F4(function (a,b,c,d) {    return {newEntry: a,searchFor: b,entries: c,filteredEntries: d};});
+   return _elm.EntryList.values = {_op: _op
+                                  ,Model: Model
+                                  ,initialModel: initialModel
+                                  ,NoOp: NoOp
+                                  ,Add: Add
+                                  ,Update: Update
+                                  ,Remove: Remove
+                                  ,Search: Search
+                                  ,update: update
+                                  ,updateList: updateList
+                                  ,searchForm: searchForm
+                                  ,entryList: entryList
+                                  ,entryItem: entryItem
+                                  ,entryForm: entryForm
+                                  ,debug: debug
+                                  ,view: view
+                                  ,main: main};
+};
