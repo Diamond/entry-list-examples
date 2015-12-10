@@ -1,0 +1,21 @@
+{
+  "name": "entry-list-app",
+  "version": "1.0.0",
+  "description": "An example React.js entry list app",
+  "main": "EntryListApp.js",
+  "scripts": {
+    "test": "/.js$/"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jsx-loader": "^0.13.2",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "webpack": "^1.12.9"
+  },
+  "dependencies": {
+    "babel-core": "^6.3.15",
+    "babel-loader": "^6.2.0"
+  }
+}
