@@ -5,6 +5,7 @@ var App = React.createClass({
   getInitialState: function() {
     return {
       entries: ["a", "b", "c"],
+      searchFor: "",
       wip: ""
     };
   },
@@ -21,18 +22,39 @@ var App = React.createClass({
   updateWIP: function(entry) {
     this.setState({ wip: entry });
   },
+  updateSearchTerm: function(entry) {
+    this.setState({ searchFor: entry });
+  },
+  searchEntries: function() {
+    var searchFor = this.state.searchFor;
+    return this.state.entries.filter(function(entry) {
+      return (entry.indexOf(searchFor) > -1);
+    });
+  },
   render: function() {
     return (
       <div>
         <h2>Entries</h2><br/>
+        <SearchForm updateSearchTerm={this.updateSearchTerm}/>
         <EntryForm addEntry={this.addEntry} updateWIP={this.updateWIP}/>
         <br/>
-        <EntryList entries={this.state.entries} removeEntry={this.removeEntry}/>
+        <EntryList entries={this.searchEntries()} removeEntry={this.removeEntry}/>
         <br/>
         <h3>New Entry: {this.state.wip}</h3>
       </div>
     );
   }
+});
+
+var SearchForm = React.createClass({
+    search: function() {
+      this.props.updateSearchTerm(this.refs.search.value);
+    },
+    render: function() {
+      return (
+        <input type="text" placeholder="Search" ref="search" onInput={this.search}/>
+      );
+    }
 });
 
 var EntryList = React.createClass({

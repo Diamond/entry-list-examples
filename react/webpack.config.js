@@ -1,6 +1,6 @@
 module.exports = {
   entry: {
-    entryListApp: './EntryListApp'
+    entryListApp: './src/EntryListApp'
   },
   output: {
     filename: 'public/[name].js'
@@ -9,7 +9,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loader: ['jsx', 'babel'],
+        loader: 'jsx',
         exclude: /node_modules/
       }
     ]

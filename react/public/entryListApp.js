@@ -51,6 +51,7 @@
 	  getInitialState: function() {
 	    return {
 	      entries: ["a", "b", "c"],
+	      searchFor: "",
 	      wip: ""
 	    };
 	  },
@@ -67,18 +68,39 @@
 	  updateWIP: function(entry) {
 	    this.setState({ wip: entry });
 	  },
+	  updateSearchTerm: function(entry) {
+	    this.setState({ searchFor: entry });
+	  },
+	  searchEntries: function() {
+	    var searchFor = this.state.searchFor;
+	    return this.state.entries.filter(function(entry) {
+	      return (entry.indexOf(searchFor) > -1);
+	    });
+	  },
 	  render: function() {
 	    return (
 	      React.createElement("div", null, 
 	        React.createElement("h2", null, "Entries"), React.createElement("br", null), 
+	        React.createElement(SearchForm, {updateSearchTerm: this.updateSearchTerm}), 
 	        React.createElement(EntryForm, {addEntry: this.addEntry, updateWIP: this.updateWIP}), 
 	        React.createElement("br", null), 
-	        React.createElement(EntryList, {entries: this.state.entries, removeEntry: this.removeEntry}), 
+	        React.createElement(EntryList, {entries: this.searchEntries(), removeEntry: this.removeEntry}), 
 	        React.createElement("br", null), 
 	        React.createElement("h3", null, "New Entry: ", this.state.wip)
 	      )
 	    );
 	  }
+	});
+
+	var SearchForm = React.createClass({displayName: "SearchForm",
+	    search: function() {
+	      this.props.updateSearchTerm(this.refs.search.value);
+	    },
+	    render: function() {
+	      return (
+	        React.createElement("input", {type: "text", placeholder: "Search", ref: "search", onInput: this.search})
+	      );
+	    }
 	});
 
 	var EntryList = React.createClass({displayName: "EntryList",
