@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Entry List App - Angular</title>
+  </head>
+  <body ng-app="myApp">
+    <div ng-controller="EntryList">
+      <h2>
+        Entries
+      </h2>
+      <input type="text" placeholder="Search" ng-model="searchFor">
+      <br>
+      <input type="text" placeholder="Entry Name" ng-model="newEntry">
+      <button ng-click="addEntry()">
+        Add
+      </button>
+      <ul>
+        <li ng-repeat="entry in entries | filter: searchFor">
+          {{entry}} <button>Remove</button>
+        </li>
+      </ul>
+      <h3>
+        New entry: {{newEntry}}
+      </h3>
+    </div>
+    <script src="public/EntryListApp.js"></script>
+  </body>
+</html>

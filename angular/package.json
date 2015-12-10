@@ -1,0 +1,15 @@
+{
+  "name": "entry-list-app-angular",
+  "version": "1.0.0",
+  "description": "Angular example of entry list app",
+  "main": "EntryList.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "angular": "^1.4.8",
+    "webpack": "^1.12.9"
+  }
+}
