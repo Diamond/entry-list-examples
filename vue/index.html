@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Entry List App - Vue</title>
+  </head>
+  <body>
+    <div id="entry-list">
+      <h2>
+        Entries
+      </h2>
+      <input type="text" placeholder="Search" v-model="searchFor">
+      <br>
+      <input type="text" placeholder="Entry Name" v-model="newEntry" v-on:keyup.enter="addTodo">
+      <button v-on:click="addTodo">
+        Add
+      </button>
+      <ul>
+        <li v-for="todo in filteredTodos">
+          {{todo}} <button v-on:click="removeTodo" data-todo="{{todo}}">Remove</button>
+        </li>
+      </ul>
+      <h3>
+        New entry: {{newEntry}}
+      </h3>
+    </div>
+    <script src="public/EntryListApp.js"></script>
+  </body>
+</html>
