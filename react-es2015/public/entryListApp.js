@@ -46,6 +46,8 @@
 
 	"use strict";
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -56,132 +58,249 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var App = _react2.default.createClass({
-	  displayName: "App",
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	  getInitialState: function getInitialState() {
-	    return {
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var App = function (_React$Component) {
+	  _inherits(App, _React$Component);
+
+	  function App(props) {
+	    _classCallCheck(this, App);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props));
+
+	    _this.state = {
 	      entries: ["a", "b", "c"],
 	      searchFor: "",
 	      wip: ""
 	    };
-	  },
-	  removeEntry: function removeEntry(entry) {
-	    var newEntries = this.state.entries.filter(function (e) {
-	      return e !== entry;
-	    });
-	    this.setState({ entries: newEntries });
-	  },
-	  addEntry: function addEntry(entry) {
-	    this.state.entries.push(entry);
-	    this.setState({ entries: this.state.entries, wip: "" });
-	  },
-	  updateWIP: function updateWIP(entry) {
-	    this.setState({ wip: entry });
-	  },
-	  updateSearchTerm: function updateSearchTerm(entry) {
-	    this.setState({ searchFor: entry });
-	  },
-	  searchEntries: function searchEntries() {
-	    var searchFor = this.state.searchFor;
-	    return this.state.entries.filter(function (entry) {
-	      return entry.indexOf(searchFor) > -1;
-	    });
-	  },
-	  render: function render() {
-	    return _react2.default.createElement(
-	      "div",
-	      null,
-	      _react2.default.createElement(
-	        "h2",
+	    _this.removeEntry = _this.removeEntry.bind(_this);
+	    _this.addEntry = _this.addEntry.bind(_this);
+	    _this.updateWIP = _this.updateWIP.bind(_this);
+	    _this.updateSearchTerm = _this.updateSearchTerm.bind(_this);
+	    _this.searchEntries = _this.searchEntries.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(App, [{
+	    key: "removeEntry",
+	    value: function removeEntry(entry) {
+	      var newEntries = this.state.entries.filter(function (e) {
+	        return e !== entry;
+	      });
+	      this.setState({ entries: newEntries });
+	    }
+	  }, {
+	    key: "addEntry",
+	    value: function addEntry(entry) {
+	      this.state.entries.push(entry);
+	      this.setState({ entries: this.state.entries, wip: "" });
+	    }
+	  }, {
+	    key: "updateWIP",
+	    value: function updateWIP(entry) {
+	      this.setState({ wip: entry });
+	    }
+	  }, {
+	    key: "updateSearchTerm",
+	    value: function updateSearchTerm(entry) {
+	      this.setState({ searchFor: entry });
+	    }
+	  }, {
+	    key: "searchEntries",
+	    value: function searchEntries() {
+	      var searchFor = this.state.searchFor;
+	      return this.state.entries.filter(function (entry) {
+	        return entry.indexOf(searchFor) > -1;
+	      });
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
 	        null,
-	        "Entries"
-	      ),
-	      _react2.default.createElement("br", null),
-	      _react2.default.createElement(SearchForm, { updateSearchTerm: this.updateSearchTerm }),
-	      _react2.default.createElement(EntryForm, { addEntry: this.addEntry, updateWIP: this.updateWIP }),
-	      _react2.default.createElement("br", null),
-	      _react2.default.createElement(EntryList, { entries: this.searchEntries(), removeEntry: this.removeEntry }),
-	      _react2.default.createElement("br", null),
-	      _react2.default.createElement(
-	        "h3",
+	        _react2.default.createElement(
+	          "h2",
+	          null,
+	          "Entries"
+	        ),
+	        _react2.default.createElement("br", null),
+	        _react2.default.createElement(SearchForm, { updateSearchTerm: this.updateSearchTerm }),
+	        _react2.default.createElement(EntryForm, { addEntry: this.addEntry, updateWIP: this.updateWIP }),
+	        _react2.default.createElement("br", null),
+	        _react2.default.createElement(EntryList, { entries: this.searchEntries(), removeEntry: this.removeEntry }),
+	        _react2.default.createElement("br", null),
+	        _react2.default.createElement(
+	          "h3",
+	          null,
+	          "New Entry: ",
+	          this.state.wip
+	        )
+	      );
+	    }
+	  }]);
+
+	  return App;
+	}(_react2.default.Component);
+
+	;
+
+	var SearchForm = function (_React$Component2) {
+	  _inherits(SearchForm, _React$Component2);
+
+	  function SearchForm(props) {
+	    _classCallCheck(this, SearchForm);
+
+	    var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(SearchForm).call(this, props));
+
+	    _this2.search = _this2.search.bind(_this2);
+	    return _this2;
+	  }
+
+	  _createClass(SearchForm, [{
+	    key: "search",
+	    value: function search() {
+	      this.props.updateSearchTerm(this.refs.search.value);
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement("input", { type: "text", placeholder: "Search", ref: "search", onInput: this.search });
+	    }
+	  }]);
+
+	  return SearchForm;
+	}(_react2.default.Component);
+
+	;
+
+	var EntryList = function (_React$Component3) {
+	  _inherits(EntryList, _React$Component3);
+
+	  function EntryList(props) {
+	    _classCallCheck(this, EntryList);
+
+	    var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(EntryList).call(this, props));
+
+	    _this3.renderEntry = _this3.renderEntry.bind(_this3);
+	    return _this3;
+	  }
+
+	  _createClass(EntryList, [{
+	    key: "renderEntry",
+	    value: function renderEntry(entry) {
+	      return _react2.default.createElement(EntryItem, { entry: entry, key: entry, removeEntry: this.props.removeEntry });
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "ul",
 	        null,
-	        "New Entry: ",
-	        this.state.wip
-	      )
-	    );
+	        this.props.entries.map(this.renderEntry)
+	      );
+	    }
+	  }]);
+
+	  return EntryList;
+	}(_react2.default.Component);
+
+	;
+
+	var EntryItem = function (_React$Component4) {
+	  _inherits(EntryItem, _React$Component4);
+
+	  function EntryItem(props) {
+	    _classCallCheck(this, EntryItem);
+
+	    var _this4 = _possibleConstructorReturn(this, Object.getPrototypeOf(EntryItem).call(this, props));
+
+	    _this4.remove = _this4.remove.bind(_this4);
+	    return _this4;
 	  }
-	});
 
-	var SearchForm = _react2.default.createClass({
-	  displayName: "SearchForm",
+	  _createClass(EntryItem, [{
+	    key: "remove",
+	    value: function remove() {
+	      this.props.removeEntry(this.props.entry);
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "li",
+	        { key: this.props.entry },
+	        this.props.entry,
+	        _react2.default.createElement(
+	          "button",
+	          { onClick: this.remove },
+	          "Remove"
+	        )
+	      );
+	    }
+	  }]);
 
-	  search: function search() {
-	    this.props.updateSearchTerm(this.refs.search.value);
-	  },
-	  render: function render() {
-	    return _react2.default.createElement("input", { type: "text", placeholder: "Search", ref: "search", onInput: this.search });
+	  return EntryItem;
+	}(_react2.default.Component);
+
+	;
+
+	var EntryForm = function (_React$Component5) {
+	  _inherits(EntryForm, _React$Component5);
+
+	  function EntryForm(props) {
+	    _classCallCheck(this, EntryForm);
+
+	    var _this5 = _possibleConstructorReturn(this, Object.getPrototypeOf(EntryForm).call(this, props));
+
+	    _this5.updateEntry = _this5.updateEntry.bind(_this5);
+	    _this5.addEntry = _this5.addEntry.bind(_this5);
+	    _this5.handleKeyDown = _this5.handleKeyDown.bind(_this5);
+	    return _this5;
 	  }
-	});
 
-	var EntryList = _react2.default.createClass({
-	  displayName: "EntryList",
+	  _createClass(EntryForm, [{
+	    key: "addEntry",
+	    value: function addEntry() {
+	      this.props.addEntry(this.refs.entry.value);
+	      this.refs.entry.value = "";
+	    }
+	  }, {
+	    key: "updateEntry",
+	    value: function updateEntry() {
+	      this.props.updateWIP(this.refs.entry.value);
+	    }
+	  }, {
+	    key: "handleKeyDown",
+	    value: function handleKeyDown(event) {
+	      if (event.keyCode === 13) {
+	        this.addEntry();
+	      }
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        null,
+	        _react2.default.createElement("input", { type: "text", ref: "entry", onInput: this.updateEntry, onKeyDown: this.handleKeyDown }),
+	        _react2.default.createElement(
+	          "button",
+	          { onClick: this.addEntry },
+	          "Add"
+	        )
+	      );
+	    }
+	  }]);
 
-	  renderEntry: function renderEntry(entry) {
-	    return _react2.default.createElement(EntryItem, { entry: entry, key: entry, removeEntry: this.props.removeEntry });
-	  },
-	  render: function render() {
-	    return _react2.default.createElement(
-	      "ul",
-	      null,
-	      this.props.entries.map(this.renderEntry)
-	    );
-	  }
-	});
+	  return EntryForm;
+	}(_react2.default.Component);
 
-	var EntryItem = _react2.default.createClass({
-	  displayName: "EntryItem",
-
-	  remove: function remove() {
-	    this.props.removeEntry(this.props.entry);
-	  },
-	  render: function render() {
-	    return _react2.default.createElement(
-	      "li",
-	      { key: this.props.entry },
-	      this.props.entry,
-	      _react2.default.createElement(
-	        "button",
-	        { onClick: this.remove },
-	        "Remove"
-	      )
-	    );
-	  }
-	});
-
-	var EntryForm = _react2.default.createClass({
-	  displayName: "EntryForm",
-
-	  addEntry: function addEntry() {
-	    this.props.addEntry(this.refs.entry.value);
-	    this.refs.entry.value = "";
-	  },
-	  updateEntry: function updateEntry() {
-	    this.props.updateWIP(this.refs.entry.value);
-	  },
-	  render: function render() {
-	    return _react2.default.createElement(
-	      "div",
-	      null,
-	      _react2.default.createElement("input", { type: "text", ref: "entry", onInput: this.updateEntry }),
-	      _react2.default.createElement(
-	        "button",
-	        { onClick: this.addEntry },
-	        "Add"
-	      )
-	    );
-	  }
-	});
+	;
 
 	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('container'));
 
